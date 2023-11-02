@@ -149,6 +149,9 @@ cv::Mat U2NetModel::predict(cv::Mat& input_tensor, int batch_size, int index)
             float a1 = output_data[1 * 512 * 512 + i * 512 + j];
             if (std::max(a0, a1) == a0) out0.at<uchar>(i, j) = 255;
             if (std::max(a0, a1) == a1) out1.at<uchar>(i, j) = 255;
+            //if (max(max(max(max(max(max(max(max(a0, a1), a2), a3), a4), a5), a6), a7), a8) == a0) out0.at<uchar>(i, j) = 255;
+            //if (max(max(max(max(max(max(max(max(a0, a1), a2), a3), a4), a5), a6), a7), a8) == a1) out1.at<uchar>(i, j) = 255;
+            //if (max(max(max(max(max(max(max(max(a0, a1), a2), a3), a4), a5), a6), a7), a8) == a2) out2.at<uchar>(i, j) = 255;
 
         }
     }
@@ -159,7 +162,7 @@ cv::Mat U2NetModel::predict(cv::Mat& input_tensor, int batch_size, int index)
 }
 int main(int argc, char* argv[])
 {
-    U2NetModel model(L"D:/testxx.onnx");
+    U2NetModel model(L"D:/test.onnx");
     cv::Mat image = cv::imread("E:/image/2023_10_09_13_04_38_413/DA1346115/ori/images/2_0_ori.tiff");
     cv::resize(image, image, { 512,512 }, 0.0, 0.0, cv::INTER_CUBIC);//调整大小到320*320
 
